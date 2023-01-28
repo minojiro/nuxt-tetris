@@ -44,17 +44,16 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div>
-    <div v-for="line in field" :style="{display: 'flex'}">
-      <div v-for="cell in line">
-        {{ cell }}
+  <div class="h-screen w-screen flex justify-center items-center">
+    <div class="max-w-xs w-full">
+      <div v-for="line in field" class="flex">
+        <Block v-for="cell in line" :num="cell" />
       </div>
-    </div>
-    <div v-if="gameStatus === 'cover'">
-      <p>press any key to start</p>
-    </div>
-    <div v-if="gameStatus === 'end'">
-      <p>gameover</p>
+      <div class="mt-5">
+        <p v-if="gameStatus === 'cover'">Press any key to start</p>
+        <p v-if="gameStatus === 'playing'">Playing...</p>
+        <p v-if="gameStatus === 'end'">Game Over!</p>
+      </div>
     </div>
   </div>
 </template>
