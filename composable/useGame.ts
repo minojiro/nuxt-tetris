@@ -23,7 +23,7 @@ const getEmptyField = (withWall = false): Field => {
   return Array.from({ length: FIELD_HEIGHT }, (_, i) =>
     Array.from({ length: FIELD_WIDTH }, (_, j) => {
       return withWall &&
-        (i === 0 || i === FIELD_HEIGHT - 1 || j === 0 || j === FIELD_WIDTH - 1)
+        (i === FIELD_HEIGHT - 1 || j === 0 || j === FIELD_WIDTH - 1)
         ? 1
         : 0;
     })
