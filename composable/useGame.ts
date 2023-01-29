@@ -32,6 +32,7 @@ const getEmptyField = (withWall = false): Field => {
 
 export const useGame = ({ genRandomNum }: { genRandomNum: () => number }) => {
   const gameStatus = ref<GameStatus>("cover");
+  const score = ref<number>(0);
 
   const fixedField = ref(getEmptyField(true));
   const currentBlockPosition = ref<Position>([0, 0]);
@@ -84,6 +85,7 @@ export const useGame = ({ genRandomNum }: { genRandomNum: () => number }) => {
     const removedCount = FIELD_HEIGHT - openRows.length;
     const headRows = getEmptyField(true).slice(0, removedCount);
     fixedField.value = [...headRows, ...openRows];
+    score.value += Math.pow(removedCount, 2);
   };
 
   const moveBlock = (direction: Direction) => {
@@ -122,5 +124,6 @@ export const useGame = ({ genRandomNum }: { genRandomNum: () => number }) => {
     moveBlock,
     gameStart,
     tick,
+    score: computed(() => score.value),
   };
 };

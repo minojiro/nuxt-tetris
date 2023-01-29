@@ -7,6 +7,7 @@ const {
   tick,
   moveBlock,
   field,
+  score,
 } = useGame({genRandomNum: Math.random})
 
 const timerFn = () => {
@@ -51,8 +52,8 @@ onBeforeUnmount(() => {
       </div>
       <div class="mt-5">
         <p v-if="gameStatus === 'cover'">Press any key to start</p>
-        <p v-if="gameStatus === 'playing'">Playing...</p>
-        <p v-if="gameStatus === 'end'">Game Over!</p>
+        <p v-if="gameStatus === 'playing'">SCORE: {{ score }}</p>
+        <p v-if="gameStatus === 'end'">Game Over! (SCORE: {{ score }})</p>
       </div>
     </div>
   </div>

@@ -116,4 +116,29 @@ describe("useGame", () => {
 
     expect(1).toBe(1);
   });
+
+  describe("スコア", () => {
+    it.todo("1行消すと、1点加算されること");
+    it.todo("3行消すと、9点加算されること");
+    it.todo("4行消すと、16点加算されること");
+    it("2行消すと、4点加算されること", () => {
+      const blockId = 0;
+      const genRandomNum = () => (1 / BLOCKS.length) * blockId;
+      const { moveBlock, field, gameStart, score } = useGame({
+        genRandomNum,
+      });
+      gameStart();
+      expect(score.value).toBe(0);
+      for (var i = 0; i < 4; i++) moveBlock("left");
+      for (var i = 0; i < 18; i++) moveBlock("down");
+      for (var i = 0; i < 2; i++) moveBlock("left");
+      for (var i = 0; i < 18; i++) moveBlock("down");
+      for (var i = 0; i < 18; i++) moveBlock("down");
+      for (var i = 0; i < 4; i++) moveBlock("right");
+      for (var i = 0; i < 18; i++) moveBlock("down");
+      for (var i = 0; i < 2; i++) moveBlock("right");
+      for (var i = 0; i < 18; i++) moveBlock("down");
+      expect(score.value).toBe(4);
+    });
+  });
 });
