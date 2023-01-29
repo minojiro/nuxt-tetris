@@ -14,6 +14,7 @@ const props = defineProps({
       '3': 'bg-green-500',
       '4': 'bg-yellow-500',
       '5': 'bg-purple-500',
+      '7': 'bg-indigo-200',
     }[String(props.num)]"
   ></div>
 </template>
