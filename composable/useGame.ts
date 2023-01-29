@@ -76,6 +76,16 @@ export const useGame = ({ genRandomNum }: { genRandomNum: () => number }) => {
     }
   };
 
+  const flushFilledRows = () => {
+    const openRows = fixedField.value.filter((line, lineIndex) => {
+      if (lineIndex === FIELD_HEIGHT - 1) return true;
+      return line.some((cell) => cell === 0);
+    });
+    const removedCount = FIELD_HEIGHT - openRows.length;
+    const headRows = getEmptyField(true).slice(0, removedCount);
+    fixedField.value = [...headRows, ...openRows];
+  };
+
   const moveBlock = (direction: Direction) => {
     if (gameStatus.value !== "playing") return;
     const [movX, movY] = KEY_MOVE_MAP[direction];
@@ -89,6 +99,7 @@ export const useGame = ({ genRandomNum }: { genRandomNum: () => number }) => {
       currentBlockPosition.value = [curX, curY];
       if (direction === "down") {
         fixedField.value = field.value;
+        flushFilledRows();
         setNextBlock();
       } else if (direction === "rotate") {
         currentBlockRotate.value--;

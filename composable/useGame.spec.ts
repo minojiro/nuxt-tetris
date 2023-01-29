@@ -85,4 +85,35 @@ describe("useGame", () => {
     expect(getFieldStr(field.value)).toMatchSnapshot();
     expect(gameStatus.value).toBe("end");
   });
+
+  it("塗りつぶされた行は削除されること", () => {
+    const blockId = 1;
+    const genRandomNum = () => (1 / BLOCKS.length) * blockId;
+    const { moveBlock, field, gameStart } = useGame({
+      genRandomNum,
+    });
+
+    gameStart();
+    moveBlock("rotate");
+    for (var i = 0; i < 19; i++) moveBlock("down");
+
+    moveBlock("rotate");
+    for (var i = 0; i < 3; i++) moveBlock("left");
+    for (var i = 0; i < 18; i++) moveBlock("down");
+
+    moveBlock("rotate");
+    for (var i = 0; i < 2; i++) moveBlock("right");
+    for (var i = 0; i < 18; i++) moveBlock("down");
+
+    for (var i = 0; i < 5; i++) moveBlock("right");
+    for (var i = 0; i < 17; i++) moveBlock("down");
+
+    for (var i = 0; i < 15; i++) moveBlock("down");
+
+    expect(getFieldStr(field.value)).toMatchSnapshot();
+    moveBlock("down");
+    expect(getFieldStr(field.value)).toMatchSnapshot();
+
+    expect(1).toBe(1);
+  });
 });
