@@ -50,7 +50,7 @@ onBeforeUnmount(() => {
       <div v-for="line in field" class="flex">
         <Block v-for="cell in line" :num="cell" />
       </div>
-      <div class="mt-5">
+      <div class="mt-5 text-white font-bold">
         <p v-if="gameStatus === 'cover'">Press any key to start</p>
         <p v-if="gameStatus === 'playing'">SCORE: {{ score }}</p>
         <p v-if="gameStatus === 'end'">Game Over! (SCORE: {{ score }})</p>
